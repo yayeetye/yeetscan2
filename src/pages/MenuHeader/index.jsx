@@ -19,7 +19,7 @@ const EthPrice = () => {
     if (ethPrice === null) {
         return <div>Loading ETH Price...</div>;
     }
-    return <div>ETH Price: ${ethPrice}</div>
+    return <div>ETH Price: ${ethPrice} 🔴🔴🔴WS DONT 卷 pls🔴🔴🔴</div>
 }
 const MenuHeader = () => {
     const items = [
@@ -77,10 +77,10 @@ const MenuHeader = () => {
             label: 'LayerZero',
             key: 'layer',
         },
-        {
-            label: 'Mirror',
-            key: 'mirror',
-        },
+       // {
+       //     label: 'Mirror',
+       //     key: 'mirror',
+       // },
         {
             label: 'Deposit',
             key: 'deposit',
