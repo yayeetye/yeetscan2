@@ -61,6 +61,16 @@ const Overview = () => {
     
     useEffect(checkVersion, [latestVersion]);
 
+    useEffect(() => {
+        const fetchEthPrice = async () => {
+            const ethPrice = await getEthPrice();
+            setEthPrice(ethPrice);
+        };
+        fetchEthPrice();
+    }, []);
+
+    const [ethPrice, setEthPrice] = useState(0);
+
     const zksAddresses = localStorage.getItem('addresses');
     const starkAddresses = localStorage.getItem('stark_addresses');
     const l0Addresses = localStorage.getItem('l0_addresses');
@@ -196,17 +206,23 @@ const Overview = () => {
         }
             return total;
     }, 0);
+    const totallineaUsdcBalance = lineaAddressList.reduce((total, addressData) => {
+        if ('linea_usdc_balance' in addressData) {
+            const linea_usdc_balance = parseFloat(addressData.linea_usdc_balance);
+            return total + linea_usdc_balance;
+        }
+            return total;
+    }, 0);
     const totalEth = parseFloat(totalzksEthBalance + totalzks1Balance + totalzks2Balance + totalstarkEthBalance + totallineaEthBalance).toFixed(2);
-    const totalUsdc = parseFloat(totalzks2UsdcBalance + totalstarkUsdcBalance).toFixed(2);
+    const totalUsdc = parseFloat(totalzks2UsdcBalance + totalstarkUsdcBalance + totallineaUsdcBalance).toFixed(2);
     const totalUsdt = parseFloat(totalstarkUsdtBalance).toFixed(2);
     const totalDai = parseFloat(totalstarkDaiBalance).toFixed(2);
     const totalBusd = parseFloat(totallineaBusdBalance).toFixed(2);
-    const ethPrice = 1880;
     const totalBalance = parseFloat(Number(totalEth) * ethPrice + Number(totalUsdc) + Number(totalUsdt) + Number(totalDai) + Number(totalBusd)).toFixed(2);
     const valueOption = {
     title : {
         text: '资产总览',
-        subtext: `资产总额 ${totalBalance}U L2资产总额 ${parseInt(Number(totalBalance) - Number(totalzksEthBalance) * ethPrice)}U\n\nETH(${totalEth}) 稳定币(${parseInt(Number(totalzks2UsdcBalance) + Number(totalstarkUsdcBalance) + Number(totalstarkUsdtBalance) + Number(totalstarkDaiBalance) + Number(totallineaBusdBalance))})`,
+        subtext: `资产总额 ${totalBalance}U L2资产总额 ${parseInt(Number(totalBalance) - Number(totalzksEthBalance) * ethPrice)}U\n\nETH(${totalEth}) 稳定币(${parseInt(Number(totalzks2UsdcBalance) + Number(totalstarkUsdcBalance) + Number(totalstarkUsdtBalance) + Number(totalstarkDaiBalance) + Number(totallineaBusdBalance) + Number(totallineaUsdcBalance))})`,
         x:'center'
         },
     tooltip: {
@@ -288,7 +304,7 @@ const Overview = () => {
             { value: parseInt(totalzks2Balance * ethPrice + totalzks2UsdcBalance), name: 'zkSync Era' },
             { value: parseInt(totalzks1Balance * ethPrice), name: 'zkSync Lite' },
             { value: parseInt(totalstarkEthBalance * ethPrice + totalstarkUsdcBalance + totalstarkUsdtBalance + totalstarkDaiBalance), name: 'StarkNet' },
-            { value: parseInt(totallineaEthBalance * ethPrice + totallineaBusdBalance), name: 'Linea' }
+            { value: parseInt(totallineaEthBalance * ethPrice + totallineaBusdBalance + totallineaUsdcBalance), name: 'Linea' }
         ]
         }
     ]

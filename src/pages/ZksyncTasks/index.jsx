@@ -68,6 +68,7 @@ function ZksyncTasks() {
     const rollupContract = "0x5B91962F5ECa75E6558E4d32Df69B30f75cc6FE5";
     const znsContract = "0xCBE2093030F485adAaf5b61deb4D9cA8ADEAE509";
     const veloContract = "0xd999E16e68476bC749A28FC14a0c3b6d7073F50c";
+    const veloContract2 = "0xf5E67261CB357eDb6C7719fEFAFaaB280cB5E2A6";
     const ReactorFusionContract = "0xC5db68F30D21cBe0C9Eac7BE5eA83468d69297e6";
     const ReactorFusionContract2 = "0x04e9Db37d8EA0760072e1aCE3F2A219988Fdac29";
     const eraLendContract = "0x1BbD33384869b30A323e15868Ce46013C82B86FB";
@@ -79,6 +80,7 @@ function ZksyncTasks() {
     const openoceanContract = "0x36A1aCbbCAfca2468b85011DDD16E7Cb4d673230";
     const ezkContract = "0x498f7bB59c61307De7dEA005877220e4406470e9";
     const odosContract = "0xA269031037B4D5fa3F771c401D19E57def6Cb491";
+    const odosContract2 = "0x4bBa932E9792A2b917D47830C93a9BC79320E4f7";
     const dmailContract = "0x981F198286E40F9979274E0876636E9144B8FB8E";
     const pancakeContract = "0xf8b59f3c3Ab33200ec80a8A58b2aA5F5D2a8944C";
 
@@ -158,7 +160,8 @@ function ZksyncTasks() {
                 promisesQueue.push(() => {
                     return new Promise((resolve) => {
                         const result = checkTaskStatus(item.address, veloContract);
-                        item.velo = result;
+                        const result2 = checkTaskStatus(item.address, veloContract2);
+                        item.velo = result + result2;
                         resolve();
                     });
                 });
@@ -216,7 +219,8 @@ function ZksyncTasks() {
                 promisesQueue.push(() => {
                     return new Promise((resolve) => {
                         const result = checkTaskStatus(item.address, odosContract);
-                        item.odos = result;
+                        const result2 = checkTaskStatus(item.address, odosContract2);
+                        item.odos = result + result2;
                         resolve();
                     });
                 });
@@ -336,7 +340,8 @@ function ZksyncTasks() {
                     promisesQueue.push(() => {
                         return new Promise((resolve) => {
                             const result = checkTaskStatusByArray(contractAddresses, veloContract);
-                            item.velo = result;
+                            const result2 = checkTaskStatusByArray(contractAddresses, veloContract2);
+                            item.velo = result + result2;
                             resolve();
                         });
                     });
@@ -394,7 +399,8 @@ function ZksyncTasks() {
                     promisesQueue.push(() => {
                         return new Promise((resolve) => {
                             const result = checkTaskStatusByArray(contractAddresses, odosContract);
-                            item.odos = result;
+                            const result2 = checkTaskStatusByArray(contractAddresses, odosContract2);
+                            item.odos = result + result2;
                             resolve();
                         });
                     });
@@ -824,7 +830,7 @@ function ZksyncTasks() {
                     width: 55
                 },
                 {
-                    title: <a href="https://app.velocore.xyz/swap" target="_blank" rel="noopener noreferrer">velo</a>,
+                    title: <a href="https://zksync-v2.velocore.xyz/swap" target="_blank" rel="noopener noreferrer">velo-v2</a>,
                     dataIndex: "velo",
                     key: "velo",
                     align: "center",
