@@ -27,11 +27,11 @@ function getScrollLastTX(lastTxDatetime) {
     const diffInHours = Math.floor(diff / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInHours / 24);
     if (diffInDays > 0) {
-        return `${diffInDays} 天前`
+        return `${diffInDays} Dat`
     } else if (diffInHours > 0) {
-        return `${diffInHours} 小时前`
+        return `${diffInHours} Hours Ago`
     } else {
-        return "刚刚"
+        return "Just Now"
     }
 }
 
