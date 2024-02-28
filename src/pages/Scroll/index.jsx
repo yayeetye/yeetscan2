@@ -106,8 +106,8 @@ function Scroll() {
     const handleRefresh = async () => {
         if (!selectedKeys.length) {
             notification.error({
-                message: "错误",
-                description: "请先选择要刷新的地址",
+                message: "ERROR",
+                description: "Select the address",
             }, 2);
             return;
         }
@@ -219,13 +219,13 @@ function Scroll() {
             processQueue();
         } catch (error) {
             notification.error({
-                message: "错误",
+                message: "ERROR",
                 description: error.message,
             }, 2);
         } finally {
             setIsLoading(false);
             setSelectedKeys([]);
-            message.success("刷新成功");
+            message.success("Done refresh");
         }
     };
 
@@ -264,8 +264,8 @@ function Scroll() {
                 let note = names[addresses.indexOf(address)];
                 if (address.length !== 42) {
                     notification.error({
-                        message: "错误",
-                        description: "请输入正确的地址",
+                        message: "ERROR",
+                        description: "Enter correct address",
                     });
                     continue;
                 }
@@ -455,7 +455,7 @@ function Scroll() {
             width: 70,
         },
         {
-            title: "备注",
+            title: "Remarks",
             dataIndex: "name",
             key: "name",
             align: "center",
@@ -493,7 +493,7 @@ function Scroll() {
         {
             title: (
                 <span>
-                钱包地址
+                Address
                     <span onClick={toggleHideColumn} style={{ marginLeft: 8, cursor: 'pointer' }}>
                         {getEyeIcon()}
                     </span>
@@ -511,7 +511,7 @@ function Scroll() {
             width: 360
         },
         // {
-        //     title: "余额",
+        //     title: "Balance",
         //     key: "debank",
         //     className: "debank",
         //     align: "center",
@@ -623,7 +623,7 @@ function Scroll() {
                       width: 50
                     },
                 {
-                    title: "最后交易",
+                    title: "Last Transaction",
                     dataIndex: "scroll_last_tx",
                     key: "scroll_last_tx",
                     align: "center",
@@ -632,7 +632,7 @@ function Scroll() {
                       
                         if (text === null) {
                           return <Spin />;
-                        } else if (text?.includes("天") && parseInt(text) > 7) {
+                        } else if (text?.includes("Day") && parseInt(text) > 7) {
                             textColor = "red";
                         } else {
                           textColor = "#1677ff";
@@ -696,11 +696,11 @@ function Scroll() {
                     ],
                 },
                 {
-                    title: "活跃统计",
+                    title: "Activity Record",
                     key: "activity_stats_group",
                     children: [
                         {
-                            title: "日",
+                            title: "D",
                             dataIndex: "dayActivity",
                             key: "dayActivity",
                             align: "center",
@@ -709,7 +709,7 @@ function Scroll() {
                             width: 55
                         },
                         {
-                            title: "周",
+                            title: "W",
                             dataIndex: "weekActivity",
                             key: "weekActivity",
                             align: "center",
@@ -718,7 +718,7 @@ function Scroll() {
                             width: 50
                         },
                         {
-                            title: "月",
+                            title: "M",
                             dataIndex: "monthActivity",
                             key: "monthActivity",
                             align: "center",
